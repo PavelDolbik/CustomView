@@ -122,4 +122,15 @@ protected int computeVerticalScrollRange() {
 }
 ```
 
+#### Set enable scrollBar
+```java
+setHorizontalScrollBarEnabled(true);
+setVerticalScrollBarEnabled(true);
+```
+
+#### Add attr 
+```java
+android:scrollbars="horizontal|vertical"
+```
+
 
