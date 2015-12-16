@@ -2,4 +2,4 @@
 
 Examples CustomViews
 
-![example_1](test.gif)
+![test](test.gif)
