@@ -95,31 +95,19 @@ public boolean onTouchEvent(MotionEvent event) {
 #### Override methods
 ```java
 @Override
-protected int computeHorizontalScrollExtent() {
-    return canvasWidth;
-}
+protected int computeHorizontalScrollExtent() { return canvasWidth; }
 @Override
-protected int computeVerticalScrollExtent() {
-    return canvasHeight;
-}
+protected int computeVerticalScrollExtent() { return canvasHeight; }
 
 @Override
-protected int computeHorizontalScrollOffset() {
-    return getScrollX(); //текущий оффсет скроллинга
-}
+protected int computeHorizontalScrollOffset() { return getScrollX(); }
 @Override
-protected int computeVerticalScrollOffset() {
-	return getScrollY(); //текущий оффсет скроллинга
-}
+protected int computeVerticalScrollOffset() { return getScrollY(); }
 
 @Override
-protected int computeHorizontalScrollRange() {
-    return (int) (canvasWidth * mScaleFactor); //Размер компонента при зуме
-}
+protected int computeHorizontalScrollRange() { return (int) (canvasWidth * mScaleFactor);}
 @Override
-protected int computeVerticalScrollRange() {
-    return (int) (canvasHeight * mScaleFactor); //Размер компонента при зуме
-}
+protected int computeVerticalScrollRange() { return (int) (canvasHeight * mScaleFactor); }
 ```
 
 #### Set enable scrollBar
