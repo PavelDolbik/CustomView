@@ -3,7 +3,6 @@
 Pinch zoom and scroll
 
 ### Pinch
-
 #### Create MyScaleGestureListener
 ```java
 private class MyScaleGestureListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
@@ -47,7 +46,7 @@ public boolean onTouchEvent(MotionEvent event) {
 }
 ```
 
-#### Scale canvasHeight
+#### Scale canvas
 ```java
 @Override
 protected void onDraw(Canvas canvas) {
@@ -56,3 +55,71 @@ protected void onDraw(Canvas canvas) {
     canvas.restore();
 }
 ```
+
+### Scroll
+#### Create MyGestureListener
+```java
+private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+          
+        if( getScrollX() + distanceX < (canvasWidth * mScaleFactor) - canvasWidth && getScrollX() + distanceX > 0){
+            scrollBy((int) distanceX, 0);
+        }
+			
+        if( getScrollY() + distanceY < (canvasHeight * mScaleFactor) - canvasHeight && getScrollY()+ distanceY > 0){
+            scrollBy(0, (int)distanceY);
+        }
+
+        if (!awakenScrollBars()) { invalidate(); }
+
+        return true;
+    }
+}
+```
+
+#### Create GestureDetector
+```java
+GestureDetector detector = new GestureDetector(context, new MyGestureListener());
+```
+
+#### Register GestureDetector
+```java
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+    detector.onTouchEvent(event);
+    return true;
+}
+```
+
+#### Override methods
+```java
+@Override
+protected int computeHorizontalScrollExtent() {
+    return canvasWidth;
+}
+@Override
+protected int computeVerticalScrollExtent() {
+    return canvasHeight;
+}
+
+@Override
+protected int computeHorizontalScrollOffset() {
+    return getScrollX(); //текущий оффсет скроллинга
+}
+@Override
+protected int computeVerticalScrollOffset() {
+	return getScrollY(); //текущий оффсет скроллинга
+}
+
+@Override
+protected int computeHorizontalScrollRange() {
+    return (int) (canvasWidth * mScaleFactor); //Размер компонента при зуме
+}
+@Override
+protected int computeVerticalScrollRange() {
+    return (int) (canvasHeight * mScaleFactor); //Размер компонента при зуме
+}
+```
+
+
