@@ -67,11 +67,6 @@ private class MyGestureListener extends GestureDetector.SimpleOnGestureListener 
 		onMove(-distanceX, -distanceY);
 		return true;
     }
-
-    @Override
-    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float velocityX, float velocityY) {
-		return true;
-    }
 }
 ```
 
