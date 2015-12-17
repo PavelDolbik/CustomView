@@ -39,8 +39,8 @@
       <file leaf-file-name="MyCustomView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/moving/MyCustomView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20481928">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.35628226">
+              <caret line="94" column="80" selection-start-line="91" selection-start-column="11" selection-end-line="94" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -1776,8 +1776,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/moving/MyCustomView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20481928">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.35628226">
+          <caret line="94" column="80" selection-start-line="91" selection-start-column="11" selection-end-line="94" selection-end-column="80" />
           <folding />
         </state>
       </provider>
