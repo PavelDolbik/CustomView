@@ -25,23 +25,8 @@ GestureDetector detector = new GestureDetector(context, new MyGestureListener())
 
 private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
     @Override
-    public boolean onDoubleTap(MotionEvent motionEvent) {
-		return true;
-    }
-
-    @Override
     public boolean onDown(MotionEvent motionEvent) {
         return true;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float distanceX, float distanceY) {
-		return true;
-    }
-
-    @Override
-    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float velocityX, float velocityY) {
-		return true;
     }
 }
 
