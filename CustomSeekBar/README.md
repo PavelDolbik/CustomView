@@ -45,7 +45,7 @@ private void setThumbPosition( int progress) {
 ```java
 @Override
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-     int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+    int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
     int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
     this.setMeasuredDimension(parentWidth, parentHeight);
 
