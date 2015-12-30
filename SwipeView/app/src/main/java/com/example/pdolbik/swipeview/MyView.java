@@ -26,12 +26,10 @@ public class MyView extends View {
     private int   square;
     private int   widthSquare;
     private float touchX;
-    private float touchY;
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
-
     }
 
     private void initView() {
@@ -76,12 +74,9 @@ public class MyView extends View {
         @Override
         public boolean onDown(MotionEvent e) {
             touchX = e.getX();
-            touchY = e.getY();
-
             if(touchX < widthSquare) {
                 square = 0;
             }
-
             return true;
         }
 
