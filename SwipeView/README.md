@@ -1,0 +1,3 @@
+## SwipeView
+
+#### Init resources
