@@ -32,7 +32,6 @@ public class MyView extends ImageView {
     private boolean imgSelected;
 
 
-
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -113,4 +112,5 @@ public class MyView extends ImageView {
         }
         return true;
     }
+
 }
