@@ -23,8 +23,8 @@ import android.widget.ImageView;
 public class MyView extends ImageView {
 
     private int     redStrokeWidth  = 10;
-    private int     incrementFactor = 15;
-    private int     increment;
+    private int     decrementFactor = 15;
+    private int     decrement;
     private float   bitmapPosition;
     private Paint   redBorder;
     private Paint   imgPaint;
@@ -56,16 +56,16 @@ public class MyView extends ImageView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        increment = (w * incrementFactor)/100;
-        bitmapPosition = increment /2;
+        decrement = (w * decrementFactor)/100;
+        bitmapPosition = decrement /2;
 
         Drawable drawable = getDrawable();
         if (drawable != null) {
             Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-            roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - increment);
+            roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - decrement);
         } else {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-            roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - increment);
+            roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - decrement);
         }
     }
 

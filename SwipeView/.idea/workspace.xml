@@ -9,10 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f3d341a-736a-4be2-8378-f610f150f4de" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/swipeview/MyView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/swipeview/MyView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-    </list>
+    <list default="true" id="5f3d341a-736a-4be2-8378-f610f150f4de" name="Default" comment="" />
     <ignored path="SwipeView.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +39,8 @@
       <file leaf-file-name="MyView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/swipeview/MyView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55826086">
-              <caret line="69" column="5" selection-start-line="60" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.38086957">
+              <caret line="63" column="71" selection-start-line="63" selection-start-column="71" selection-end-line="63" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -1793,8 +1790,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/pdolbik/swipeview/MyView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55826086">
-          <caret line="69" column="5" selection-start-line="60" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.38086957">
+          <caret line="63" column="71" selection-start-line="63" selection-start-column="71" selection-end-line="63" selection-end-column="71" />
           <folding />
         </state>
       </provider>
