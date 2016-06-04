@@ -10,3 +10,4 @@ Examples CustomViews
 <img src="/screenshots/RoundedImg.gif" alt="RoundedImg" title="RoundedImg" width="240" height="360" />
 <img src="/screenshots/SwipeView.gif" alt="SwipeView" title="SwipeView" width="240" height="360" />
 <img src="/screenshots/DraggedLayout.gif" alt="DraggedLayout" title="DraggedLayout" width="240" height="360" />
+<img src="/screenshots/DropView.png" alt="DropView" title="DropView" width="240" height="360" />
