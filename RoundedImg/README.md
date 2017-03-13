@@ -1,77 +1,119 @@
 ## RoundedImg
 
 #### Init resources
-```java
-public MyView(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    init();
-}
+```kotlin
+constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int):
+            super(context, attrs, defStyleAttr) { init(context, attrs) }
 
 
-private void init() {
-    redBorder = new Paint();
-    redBorder.setAntiAlias(true);
-    redBorder.setColor(Color.RED);
-    redBorder.setStrokeWidth(redStrokeWidth);
-    redBorder.setStyle(Paint.Style.STROKE);
+private fun init(context: Context, attrs: AttributeSet) {
+        paint = Paint()
+        paint?.isAntiAlias = true
 
-    imgPaint = new Paint();
-    imgPaint.setAntiAlias(true);
-    imgPaint.setFilterBitmap(true);
-    imgPaint.setDither(true);
-}
+        paintBorder = Paint()
+        paintBorder?.isAntiAlias = true
+
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
+        if (attributes.getBoolean(R.styleable.CircleImageView_civ_border_active, true)) {
+            val defaultBorderSize = DEFAULT_BORDER_WIDTH * context.resources.displayMetrics.density
+            setBorderWidth(attributes.getDimension(R.styleable.CircleImageView_civ_border_width, defaultBorderSize))
+            setBorderColor(attributes.getColor(R.styleable.CircleImageView_civ_border_color, Color.TRANSPARENT))
+        }
+        attributes.recycle()
+    }
 ```
 
 #### Get drawable
-```java
-@Override
-protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-	super.onSizeChanged(w, h, oldw, oldh);
-    increment = (w * incrementFactor)/100;
-    bitmapPosition = increment /2;
-
-    Drawable drawable = getDrawable();
-    if (drawable != null) {
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - increment);
-    } else {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        roundBitmap = getRoundedCroppedBitmap(bitmap, getWidth() - increment);
+```kotlin
+private fun loadBitmap() {
+        if (myDrawable == drawable) { return }
+        myDrawable = drawable
+        if (myDrawable != null) {
+            this.image = drawableToBitmap(myDrawable as Drawable)
+            updateShader()
+        }
     }
-}
 ```
 
-#### Rounded bitmap
-```java
-private Bitmap getRoundedCroppedBitmap(Bitmap bitmap, int radius) {
-    Bitmap finalBitmap = bitmap.createScaledBitmap(bitmap, radius , radius, false);
-    Bitmap output = Bitmap.createBitmap(finalBitmap.getWidth(), finalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-    Rect rect = new Rect(0, 0, output.getWidth(), output.getHeight());
+#### Convert drawable to bitmap
+```kotlin
+private fun drawableToBitmap(drawable: Drawable): Bitmap {
+        if (drawable is BitmapDrawable) { return drawable.bitmap}
 
-    Canvas canvas = new Canvas(output);
-    canvas.drawCircle(
-            finalBitmap.getWidth()  / 2,
-            finalBitmap.getHeight() / 2,
-            finalBitmap.getWidth() / 2,
-            imgPaint);
+        val intrinsicWidth  = drawable.intrinsicWidth
+        val intrinsicHeight = drawable.intrinsicHeight
 
-    imgPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-    canvas.drawBitmap(finalBitmap, rect, rect, imgPaint);
+        if ( !(intrinsicWidth > 0 && intrinsicHeight > 0) ) { return null!! }
 
-    return output;
-}
+        try {
+            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+            return bitmap
+        } catch (e: OutOfMemoryError) {
+            Log.e(javaClass.toString(), "Encountered OutOfMemoryError while generating bitmap!")
+            return null!!
+        }
+    }
 ```
+
+#### Crop bitmap
+```kotlin
+private fun cropBitmap(bitmap: Bitmap): Bitmap {
+        val btm: Bitmap
+        if (bitmap.width > bitmap.height) {
+            btm = Bitmap.createBitmap(
+                    bitmap,
+                    bitmap.width /2 - bitmap.height / 2,
+                    0,
+                    bitmap.height,
+                    bitmap.height)
+        } else {
+            btm = Bitmap.createBitmap(
+                    bitmap,
+                    0,
+                    bitmap.height / 2 - bitmap.width / 2,
+                    bitmap.width,
+                    bitmap.width)
+        }
+        return btm
+    }
+
+
+#### Create shader
+```kotlin
+private fun updateShader() {
+        if (image == null) { return }
+
+        image = cropBitmap(image as Bitmap)
+        val shader = BitmapShader(image, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+
+        val matrix = Matrix()
+        val imgWidth  = canvasSize?.div(image?.width?.toFloat() ?: 0F) ?: 0F
+        val imgHeight = canvasSize?.div(image?.height?.toFloat() ?: 0F) ?: 0F
+        matrix.setScale(imgWidth, imgHeight)
+        shader.setLocalMatrix(matrix)
+
+        paint?.shader = shader
+    }
+```	
+	
 
 #### Draw view
-```java
-@Override
-protected void onDraw(Canvas canvas) {
-    canvas.drawBitmap(roundBitmap, bitmapPosition, bitmapPosition, null);
-    if (imgSelected) {
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2 - redStrokeWidth, redBorder);
+```kotlin
+override fun onDraw(canvas: Canvas) {
+        loadBitmap()
+        if (image == null) { return }
+        val circleCenter = ( canvasSize?.minus( (borderWidth ?: 0F)*2 ) )?.div(2)
+
+        val drawBorder = circleCenter?.plus((borderWidth ?: 0F)) ?: 0F
+        if (showBorder) { canvas.drawCircle(drawBorder, drawBorder, drawBorder, paintBorder) }
+
+        canvas.drawCircle(drawBorder, drawBorder, circleCenter ?: 0F, paint)
     }
-}
 ```
+
 
 #### Add animation
 ```kotlin
