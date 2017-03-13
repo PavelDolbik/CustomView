@@ -79,6 +79,7 @@ private fun cropBitmap(bitmap: Bitmap): Bitmap {
         }
         return btm
     }
+```
 
 
 #### Create shader
