@@ -74,30 +74,28 @@ protected void onDraw(Canvas canvas) {
 ```
 
 #### Add animation
-```java
-@Override
-public boolean onTouchEvent(MotionEvent event) {
-    switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN:
-            Animation scale = AnimationUtils.loadAnimation(getContext(), R.anim.scale);
-            startAnimation(scale);
-            break;
-        case MotionEvent.ACTION_UP:
-            imgSelected = !imgSelected;
-            invalidate();
-            Animation scale2 = AnimationUtils.loadAnimation(getContext(), R.anim.scale_2);
-            startAnimation(scale2);
-            break;
+```kotlin
+override fun onTouchEvent(event: MotionEvent): Boolean {
+        when(event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val scale = AnimationUtils.loadAnimation(context, R.anim.scale)
+                startAnimation(scale)
+            }
+            MotionEvent.ACTION_UP -> {
+                showBorder = !showBorder
+                val scale = AnimationUtils.loadAnimation(context, R.anim.scale_2)
+                startAnimation(scale)
+            }
+        }
+        return true
     }
-	
-    return true;
-}
 ```
 
 #### Anim
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<scale xmlns:android="http://schemas.android.com/apk/res/android"
+<scale
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:fromXScale="1.0"
     android:toXScale="0.9"
     android:fromYScale="1.0"
@@ -105,18 +103,19 @@ public boolean onTouchEvent(MotionEvent event) {
     android:duration="200"
     android:pivotX="50%"
     android:pivotY="50%"
-    android:fillAfter="true">
-</scale>
+    android:fillAfter="true"
+    />
 
 <?xml version="1.0" encoding="utf-8"?>
-<scale xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fromXScale="1.0"
-    android:toXScale="1.1"
-    android:fromYScale="1.0"
-    android:toYScale="1.1"
+<scale
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXScale="0.9"
+    android:toXScale="1.0"
+    android:fromYScale="0.9"
+    android:toYScale="1.0"
     android:duration="200"
     android:pivotX="50%"
     android:pivotY="50%"
-    android:fillAfter="true">
-</scale>
+    android:fillAfter="true"
+    />
 ```
