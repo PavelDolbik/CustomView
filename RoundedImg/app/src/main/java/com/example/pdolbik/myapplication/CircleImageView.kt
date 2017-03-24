@@ -44,6 +44,7 @@ class CircleImageView: ImageView {
 
         paintBorder = Paint()
         paintBorder?.isAntiAlias = true
+        paintBorder?.style = Paint.Style.STROKE
 
         // Загружаем атрибуты и устанавливаем значения свойств.
         // Load the styled attributes and set their properties.
@@ -118,11 +119,15 @@ class CircleImageView: ImageView {
         loadBitmap()
         if (image == null) { return }
         val circleCenter = ( canvasSize?.minus( (borderWidth ?: 0F)*2 ) )?.div(2)
+        val drawBorder = circleCenter?.plus((borderWidth ?: 0F)) ?: 0F
 
         // Рисуем рамку. Draw Border.
-        val drawBorder = circleCenter?.plus((borderWidth ?: 0F)) ?: 0F
-        if (showBorder) { canvas.drawCircle(drawBorder, drawBorder, drawBorder, paintBorder) }
-
+        if (showBorder) {
+            val halfBorder = (borderWidth ?: 0F).div(2)
+            paintBorder?.strokeWidth = borderWidth ?: 0F
+            canvas.drawCircle(drawBorder, drawBorder, drawBorder - halfBorder, paintBorder)
+        }
+        // Рисуем изображение. Draw images.
         canvas.drawCircle(drawBorder, drawBorder, circleCenter ?: 0F, paint)
     }
 
