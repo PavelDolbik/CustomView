@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,11 +22,8 @@
         android:layout_below="@id/circle"
         android:layout_marginTop="10dp"
         android:paddingLeft="5dp"
-        >
-
-    </com.dolbik.pavel.kotlinanimation.view.ExpandViewGroup>
-
-
+        android:paddingStart="5dp"
+        />
 
     <Button
         android:id="@+id/button"
@@ -37,6 +33,5 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />
-
 
 </RelativeLayout>
