@@ -90,21 +90,19 @@ class CircleImageView: ImageView {
 
 
     private fun measureSize(measureSpec: Int) : Int {
-        val result: Int
         val specMode = MeasureSpec.getMode(measureSpec)
         val specSize = MeasureSpec.getSize(measureSpec)
-        when(specMode) {
+        return when(specMode) {
         // Родитель точно задал размеры для ребенка.
         // The parent has determined an exact size for the child.
-            MeasureSpec.EXACTLY -> result = specSize
+            MeasureSpec.EXACTLY -> specSize
         // Ребенок может быть настолько большим, насколько он хочет, до указанного размера.
         // The child can be as large as it wants up to the specified size.
-            MeasureSpec.AT_MOST -> result = specSize
+            MeasureSpec.AT_MOST -> specSize
         // The parent has not imposed any constraint on the child.
         // Родитель не наложил на ребенка никаких ограничений.
-            else -> result = canvasSize ?: 0
+            else ->  canvasSize ?: 0
         }
-        return result
     }
 
 
