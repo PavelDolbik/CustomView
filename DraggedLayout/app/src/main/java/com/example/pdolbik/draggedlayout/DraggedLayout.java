@@ -4,9 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -14,9 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
-/**
- * Created by p.dolbik on 30.12.2015.
- */
+
 public class DraggedLayout extends FrameLayout {
 
     private View blueLayout;
@@ -32,11 +28,15 @@ public class DraggedLayout extends FrameLayout {
 
     public DraggedLayout(Context context) {
         super(context);
-        touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+        init();
     }
 
     public DraggedLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+
+    private void init() {
         touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
@@ -121,6 +121,7 @@ public class DraggedLayout extends FrameLayout {
         velocityTracker.addMovement(event);
     }
 
+
     public void obtainVelocityTracker() {
         if (velocityTracker == null) {
             velocityTracker = VelocityTracker.obtain();
@@ -172,10 +173,10 @@ public class DraggedLayout extends FrameLayout {
             // traveled and based on that complete the motion
 
             boolean halfway = Math.abs(redLayout.getTranslationY()) >= (getMeasuredHeight() - 100) / 2;
-            opening = opened ? !halfway : halfway;
+            opening = opened != halfway;
 
             distY = calculateDistance(opening);
-            duration = Math.round(1000 * (double) Math.abs((double) redLayout.getTranslationY())
+            duration = Math.round(1000 * Math.abs((double) redLayout.getTranslationY())
                     / (double) (getMeasuredHeight() - 100));
 
         }
@@ -208,13 +209,13 @@ public class DraggedLayout extends FrameLayout {
         set.start();
     }
 
-    class MyAnimListener implements Animator.AnimatorListener {
+    private class MyAnimListener implements Animator.AnimatorListener {
 
         int oldLayerTypeOne;
         int oldLayerTypeTwo;
         boolean opening;
 
-        public MyAnimListener(boolean opening) {
+        MyAnimListener(boolean opening) {
             super();
             this.opening = opening;
         }
