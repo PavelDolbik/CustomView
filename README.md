@@ -13,3 +13,4 @@ Examples CustomViews
 <img src="/screenshots/DropView.png" alt="DropView" title="DropView" width="240" height="360" />
 <img src="/screenshots/kotlin_rxjava_animation.gif" alt="KotlinRxJava" title="KotlinRxJava" width="240" height="360" />
 <img src="/screenshots/ShimmerView.gif" alt="ShimmerView" title="ShimmerView" width="240" height="360" />
+<img src="/screenshots/Lottie.gif" alt="Lottie" title="Lottie" width="240" height="360" />
