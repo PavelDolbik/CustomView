@@ -7,16 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-/**
- * Created by p.dolbik on 30.12.2015.
- */
 public class MyView extends View {
 
     private Bitmap bitmap;
@@ -25,7 +21,6 @@ public class MyView extends View {
 
     private int   square;
     private int   widthSquare;
-    private float touchX;
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,11 +40,13 @@ public class MyView extends View {
         detector = new GestureDetector(getContext(), new MyGestureListener());
     }
 
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         this.setMeasuredDimension(bitmap.getWidth(), bitmap.getHeight());
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -73,7 +70,7 @@ public class MyView extends View {
 
         @Override
         public boolean onDown(MotionEvent e) {
-            touchX = e.getX();
+            float touchX = e.getX();
             if(touchX < widthSquare) {
                 square = 0;
             }
@@ -95,10 +92,11 @@ public class MyView extends View {
         invalidate();
     }
 
+
     private class MyAnimation extends Animation {
         private int showSquare;
 
-        public MyAnimation(int square) {
+        MyAnimation(int square) {
             this.showSquare = square;
         }
 
@@ -109,4 +107,5 @@ public class MyView extends View {
             updateShowSquare(result);
         }
     }
+
 }
