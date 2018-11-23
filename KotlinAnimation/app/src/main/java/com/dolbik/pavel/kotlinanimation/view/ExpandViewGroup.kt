@@ -46,7 +46,7 @@ class ExpandViewGroup: ViewGroup {
         var maxWidth   = 0
         var maxHeight  = 120
 
-        for (i in 0..childCount - 1) {
+        for (i in 0 until childCount) {
             val child = getChildAt(i)
             if (child.visibility != View.GONE) {
                 childState = View.combineMeasuredStates(childState, child.measuredState)

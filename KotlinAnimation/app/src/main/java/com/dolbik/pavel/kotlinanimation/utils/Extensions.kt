@@ -6,8 +6,7 @@ import com.dolbik.pavel.kotlinanimation.animation.TranslateViewOperator
 import rx.Observable
 
 fun Observable<View>.translateView(
-                        translationX: Float,
-                        duration: Long,
-                        interpolator: Interpolator) : Observable<View> =
-        lift<View> (TranslateViewOperator(translationX, duration,interpolator)
-)
+        translationX: Float,
+        duration: Long,
+        interpolator: Interpolator
+) : Observable<View> = lift<View> (TranslateViewOperator(translationX, duration,interpolator))
